@@ -30,6 +30,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.fossdevs.securenotes.MainActivity" />
         </activity>
+        <activity
+            android:name=".ShowNotes"
+            android:label="@string/title_activity_show_notes"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.fossdevs.securenotes.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

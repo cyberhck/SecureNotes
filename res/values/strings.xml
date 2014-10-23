@@ -10,7 +10,9 @@
     <string name="newPassword">New Password</string>
     <string name="reEnterNewPassword">Confirm New Password</string>
     <string name="changePasswordBtn">Change Password</string>
-    
+    <string name="enterBtnText">Enter!</string>
+    <string name="enterPasswordHint">Password</string>
+    <string name="title_activity_show_notes">Notes</string>
     
 
 </resources>
