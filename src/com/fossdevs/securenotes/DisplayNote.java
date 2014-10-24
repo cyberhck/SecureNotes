@@ -1,5 +1,8 @@
 package com.fossdevs.securenotes;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import android.support.v7.app.ActionBarActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -25,6 +28,13 @@ public class DisplayNote extends ActionBarActivity {
 	@Override
 	protected void onResume() {
 		setContentView(R.layout.activity_display_note);
+		try{
+			AdView av=(AdView)findViewById(R.id.adView);
+			AdRequest ar=new AdRequest.Builder().build();
+			av.loadAd(ar);
+		}catch (Exception e){
+			Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+		}
 		try{
 			super.onResume();
 			Intent intent=getIntent();

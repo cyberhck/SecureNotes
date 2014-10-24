@@ -1,5 +1,8 @@
 package com.fossdevs.securenotes;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -57,6 +60,13 @@ public class ShowNotes extends ActionBarActivity {
 						startActivity(intent);
 					}
 				});
+			}
+			try{
+				AdView av=(AdView)findViewById(R.id.adView);
+				AdRequest ar=new AdRequest.Builder().build();
+				av.loadAd(ar);
+			}catch (Exception e){
+				Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
 			}
 		}catch(Exception e){
 			Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
