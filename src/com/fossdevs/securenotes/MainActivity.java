@@ -14,14 +14,9 @@ import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
 
-	@Override
-	protected void onPause() {
-		android.os.Process.killProcess(android.os.Process.myPid());
-	};
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.recreate();
         DbHelper dbhelper=new DbHelper(getApplicationContext());
         SQLiteDatabase db=dbhelper.getReadableDatabase();
         Cursor c=db.rawQuery("SELECT * FROM passphrase;", null);
@@ -33,9 +28,8 @@ public class MainActivity extends ActionBarActivity {
     }
     @Override
     protected void onResume() {
-    	super.onResume();
-    	EditText passwordField=(EditText) findViewById(R.id.password);
-    	passwordField.setText("");
+        EditText passwordField=(EditText) findViewById(R.id.password);
+        passwordField.setText("");
     };
 
 

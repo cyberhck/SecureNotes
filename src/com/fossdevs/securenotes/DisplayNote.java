@@ -21,17 +21,17 @@ import android.widget.Toast;
 public class DisplayNote extends ActionBarActivity {
 
 	@Override
-	protected void onPause() {
-		android.os.Process.killProcess(android.os.Process.myPid());
-	};
-
-	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+		super.recreate();
 		return;
 	}
+
 	@Override
 	protected void onResume() {
+		super.onResume();
+		if(GlobalObject.keyphrase==null || GlobalObject.password==null){
+			finish();
+		}
 		setContentView(R.layout.activity_display_note);
 		try{
 			AdView av=(AdView)findViewById(R.id.adView);
@@ -41,7 +41,6 @@ public class DisplayNote extends ActionBarActivity {
 			Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
 		}
 		try{
-			super.onResume();
 			Intent intent=getIntent();
 			Bundle extra=intent.getExtras();
 			String _id=extra.getString("_ID");

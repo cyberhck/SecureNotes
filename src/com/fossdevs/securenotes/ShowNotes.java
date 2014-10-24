@@ -21,10 +21,7 @@ import android.widget.Toast;
 
 public class ShowNotes extends ActionBarActivity {
 
-	@Override
-	protected void onPause() {
-		android.os.Process.killProcess(android.os.Process.myPid());
-	};
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +35,12 @@ public class ShowNotes extends ActionBarActivity {
 	}
 	@Override
 	public void onResume(){
+		super.onResume();
+		if(GlobalObject.keyphrase==null || GlobalObject.password==null){
+			finish();
+		}
+
 		try{
-			super.onResume();
 			DbHelper dbhelper=new DbHelper(getApplicationContext());
 			SQLiteDatabase db=dbhelper.getReadableDatabase();
 			final Cursor c=db.rawQuery("SELECT * FROM notes;", null);

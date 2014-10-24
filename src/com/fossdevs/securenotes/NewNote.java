@@ -14,9 +14,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class NewNote extends ActionBarActivity {
+
 	@Override
-	protected void onPause() {
-		android.os.Process.killProcess(android.os.Process.myPid());
+	protected void onResume() {
+		super.onResume();
+		if(GlobalObject.keyphrase==null || GlobalObject.password==null){
+			finish();
+		}
 	};
 
 	@Override
