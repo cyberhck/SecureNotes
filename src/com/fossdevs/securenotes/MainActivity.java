@@ -26,6 +26,12 @@ public class MainActivity extends ActionBarActivity {
         }
         setContentView(R.layout.activity_main);
     }
+    @Override
+    protected void onResume() {
+    	super.onResume();
+    	EditText passwordField=(EditText) findViewById(R.id.password);
+    	passwordField.setText("");
+    };
 
 
     @Override
