@@ -48,8 +48,8 @@ public class ShowNotes extends ActionBarActivity {
 				setContentView(R.layout.activity_show_notes_empty);
 			}else{
 				setContentView(R.layout.activity_show_notes);
-				int to[]={R.id.noteTitle};
-				String[] from=new String[] {"topic"};
+				int to[]={R.id.noteTitle,R.id.createdOn};
+				String[] from=new String[] {"topic","createdOn"};
 				ListView lv=(ListView) findViewById(R.id.listNotes);
 				Adapter adapter=new SimpleCursorAdapter(getBaseContext(), R.layout.item_list_notes, c, from, to,1);
 				lv.setAdapter((ListAdapter)adapter);

@@ -61,8 +61,8 @@ public class NewNote extends ActionBarActivity {
 				SQLiteDatabase db=dbhelper.getWritableDatabase();
 				Calendar calendar=Calendar.getInstance();
 				String Date=calendar.get(Calendar.DATE)+":"+calendar.get(Calendar.MONTH)+":"+calendar.get(Calendar.YEAR);
-				String Time=calendar.get(Calendar.HOUR)+":"+calendar.get(Calendar.MINUTE)+":"+calendar.get(Calendar.SECOND);
-				String DateTime=Date+"-"+Time;
+				String Time=calendar.get(Calendar.HOUR)+":"+calendar.get(Calendar.MINUTE);
+				String DateTime=Date+" "+Time;
 				db.execSQL("INSERT INTO notes(topic,note,lastUpdated,createdOn) VALUES ('"+title.getText().toString()+"' , '"+cryptedBody+"' , '"+DateTime+"' , '"+DateTime+"')");
 				finish();
 				
