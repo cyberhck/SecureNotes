@@ -21,6 +21,11 @@ import android.widget.Toast;
 public class DisplayNote extends ActionBarActivity {
 
 	@Override
+	protected void onPause() {
+		android.os.Process.killProcess(android.os.Process.myPid());
+	};
+
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		return;
