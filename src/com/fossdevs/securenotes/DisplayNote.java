@@ -22,7 +22,7 @@ public class DisplayNote extends ActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.recreate();
+		super.onCreate(savedInstanceState);
 		return;
 	}
 

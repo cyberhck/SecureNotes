@@ -16,9 +16,9 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.recreate();
+        super.onCreate(savedInstanceState);
         DbHelper dbhelper=new DbHelper(getApplicationContext());
-        SQLiteDatabase db=dbhelper.getReadableDatabase();
+        SQLiteDatabase db=dbhelper.getWritableDatabase();
         Cursor c=db.rawQuery("SELECT * FROM passphrase;", null);
         if(c.getCount()==0){
         	Intent intent=new Intent(getApplicationContext(),ChangePassword.class);
@@ -28,8 +28,9 @@ public class MainActivity extends ActionBarActivity {
     }
     @Override
     protected void onResume() {
-        EditText passwordField=(EditText) findViewById(R.id.password);
-        passwordField.setText("");
+    	super.onResume();
+    	EditText passwordField=(EditText) findViewById(R.id.password);
+    	passwordField.setText("");
     };
 
 

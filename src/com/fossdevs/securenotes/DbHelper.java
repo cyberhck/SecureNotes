@@ -2,7 +2,9 @@ package com.fossdevs.securenotes;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DbHelper extends SQLiteOpenHelper{
 	public static String DB_NAME="secureNotes";
@@ -24,7 +26,11 @@ public class DbHelper extends SQLiteOpenHelper{
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int arg1, int arg2) {
 		// TODO Auto-generated method stub
-		
+		try{
+			db.execSQL("UPDATE passphrase ADD COLUMN uploaded INT(1) DEFAULT 0;");
+		}catch(SQLiteException e){
+			Log.d("mytag", e.toString());
+		}
 	}
 
 }
