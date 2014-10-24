@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class ChangePassword extends ActionBarActivity {
@@ -18,6 +19,8 @@ public class ChangePassword extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_change_password);
+		ProgressBar pb=(ProgressBar) findViewById(R.id.progressBar1);
+		pb.setVisibility(View.INVISIBLE);
 		DbHelper dbhelper=new DbHelper(getApplicationContext());
 		final SQLiteDatabase db=dbhelper.getWritableDatabase();
 		final Cursor c=db.rawQuery("SELECT * FROM passphrase;", null);
@@ -47,12 +50,53 @@ public class ChangePassword extends ActionBarActivity {
 				            db.execSQL("INSERT INTO passphrase(passphrase) VALUES('"+hash+"')");
 				            Toast.makeText(getApplicationContext(), "Password Set!", Toast.LENGTH_LONG).show();
 				            finish();
+						}else{
+							Toast.makeText(getApplicationContext(), "Please enter old password", Toast.LENGTH_LONG).show();
 						}
 					}else{
 						//check if old pass is valid.
+						SHA1 sha1=new SHA1(oldPass);
+						String cypher=sha1.SHAHash;
+						sha1=new SHA1(cypher);
+						cypher=sha1.SHAHash;
+						Cursor c=db.rawQuery("SELECT * FROM passphrase;", null);
+						c.moveToFirst();
+						String cypherInDb=c.getString(c.getColumnIndex("passphrase"));
+						if(cypherInDb.equals(cypher)){
+							if(newPass.equals(reNewPass)){
+								Crypt crypt=new Crypt();
+								ProgressBar pb=(ProgressBar) findViewById(R.id.progressBar1);
+								pb.setVisibility(View.VISIBLE);
+								int total=c.getCount();
+								int current=0;
+								DbHelper dhelper=new DbHelper(getApplicationContext());
+								SQLiteDatabase sqldb=dhelper.getWritableDatabase();
+								Cursor cu=sqldb.rawQuery("SELECT * FROM notes;",null);
+								oldPass=oldPassword.getText().toString();
+								while(cu.moveToNext()){
+									String noteInDb=cu.getString(cu.getColumnIndex("note"));
+									String originalNote=crypt.decrypt(noteInDb, oldPass);
+									String newEncryptedNote=crypt.encrypt(originalNote, newPass);
+									String _id=cu.getString(cu.getColumnIndex("_id"));
+									sqldb.execSQL("UPDATE notes SET note='"+newEncryptedNote+"' WHERE _id="+_id+";");
+									current++;
+									int perc=(current/total)*100;
+									pb.setProgress(perc);
+								}
+								sha1=new SHA1(newPass);
+								String updatedPass=sha1.SHAHash;
+								sha1=new SHA1(updatedPass);
+								updatedPass=sha1.SHAHash;
+								sqldb.execSQL("UPDATE passphrase SET passphrase='"+updatedPass+"';");
+								finish();
+							}else{
+								Toast.makeText(getApplicationContext(), "New password mismatch", Toast.LENGTH_LONG).show();
+							}
+						}else{
+							Toast.makeText(getApplicationContext(), "Password Incorrect!", Toast.LENGTH_LONG).show();
+						}
 					}
 				}
-
 			});
 
 		}catch(Exception e){

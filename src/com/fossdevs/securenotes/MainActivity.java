@@ -65,6 +65,10 @@ public class MainActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+        if (id == R.id.change_password) {
+            Intent intent=new Intent(getApplicationContext(),ChangePassword.class);
+            startActivity(intent);
+        }
         return super.onOptionsItemSelected(item);
     }
 }

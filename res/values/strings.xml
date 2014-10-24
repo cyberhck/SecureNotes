@@ -28,5 +28,6 @@
     <string name="confirmDeleteNote">Are you sure you want to delete this note?</string>
 	<string name="confirmDeleteOkButton">Yes, Delete</string>
 	<string name="confirmDeleteNoButton">No, Keep it</string>
+	<string name="action_change_password">Change Password</string>
 	
 </resources>
