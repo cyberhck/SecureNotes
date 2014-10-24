@@ -9,18 +9,15 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.fossdevs.securenotes.ShowNotes" >
 
-    <ListView
-        android:id="@+id/listNotes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/adView"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" >
+<TextView
+    android:id="@+id/textView1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
+    android:text="@string/noNotesMessage"
+    android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    </ListView>
 <com.google.android.gms.ads.AdView
 	    android:id="@+id/adView"
 	    android:layout_width="match_parent"
@@ -31,4 +28,6 @@
 	    ads:adSize="BANNER"
 	    ads:adUnitId="@string/adId" >
 	</com.google.android.gms.ads.AdView>
+
+
 </RelativeLayout>

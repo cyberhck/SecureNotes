@@ -17,6 +17,13 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        DbHelper dbhelper=new DbHelper(getApplicationContext());
+        SQLiteDatabase db=dbhelper.getReadableDatabase();
+        Cursor c=db.rawQuery("SELECT * FROM passphrase;", null);
+        if(c.getCount()==0){
+        	Intent intent=new Intent(getApplicationContext(),ChangePassword.class);
+        	startActivity(intent);
+        }
         setContentView(R.layout.activity_main);
     }
 
@@ -42,6 +49,7 @@ public class MainActivity extends ActionBarActivity {
         if(hash.equals(hashInTable)){
         	Intent intent=new Intent(getApplicationContext(),ShowNotes.class);
         	GlobalObject.keyphrase=hash;
+        	GlobalObject.password=password;
         	startActivity(intent);
         }else{
         	Toast.makeText(getApplicationContext(), "Password Incorrect", Toast.LENGTH_LONG).show();

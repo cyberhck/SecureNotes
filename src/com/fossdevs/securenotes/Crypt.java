@@ -31,14 +31,10 @@ public class Crypt {
 			//length of text is equal to length of key
 			return;
 		}else{
-			int leng=t-k;
-			int times=(leng%k)+1;
-			for(int i=0;i<=times;i++){
-				this.key=this.key.concat(this.key);
-			}
-			String padding=key.substring(0, leng);
-			this.key=this.key.concat(padding);
-			this.key=this.key.substring(0, t);
+			while(key.length()<text.length()){
+	                key=key+key;
+	        }
+	        this.key=this.key.substring(0, text.length());
 		}
 	}
 	public String decrypt(String cypher,String key){

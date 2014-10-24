@@ -7,21 +7,36 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.fossdevs.securenotes.ShowNotes" >
+    tools:context="com.fossdevs.securenotes.NewNote" >
 
-    <ListView
-        android:id="@+id/listNotes"
-        android:layout_width="match_parent"
+    <EditText
+        android:id="@+id/noteTitle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/adView"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" >
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/adView"
+        android:layout_alignEnd="@+id/adView"
+        android:ems="10"
+        android:hint="@string/hintNoteTitle" >
 
-    </ListView>
-<com.google.android.gms.ads.AdView
+        <requestFocus />
+        </EditText>
+
+    <EditText
+        android:id="@+id/noteBody"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/noteTitle"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignStart="@+id/noteTitle"
+        android:layout_below="@+id/noteTitle"
+        android:ems="10"
+        android:inputType="textMultiLine" />
+
+    <com.google.android.gms.ads.AdView
 	    android:id="@+id/adView"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
@@ -31,4 +46,7 @@
 	    ads:adSize="BANNER"
 	    ads:adUnitId="@string/adId" >
 	</com.google.android.gms.ads.AdView>
+
+    
+
 </RelativeLayout>

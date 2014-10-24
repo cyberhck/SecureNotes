@@ -45,7 +45,8 @@ public class ChangePassword extends ActionBarActivity {
 				            sha1=new SHA1(hash);
 				            hash=sha1.SHAHash;
 				            db.execSQL("INSERT INTO passphrase(passphrase) VALUES('"+hash+"')");
-				            Toast.makeText(getApplicationContext(), "Inserted", Toast.LENGTH_LONG).show();
+				            Toast.makeText(getApplicationContext(), "Password Set!", Toast.LENGTH_LONG).show();
+				            finish();
 						}
 					}else{
 						//check if old pass is valid.
