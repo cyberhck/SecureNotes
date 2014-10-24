@@ -14,5 +14,12 @@
         android:title="@string/editNoteActionBar"
         android:icon="@drawable/editicon"
         app:showAsAction="ifRoom"/>
+        <item
+        android:id="@+id/deleteNote"
+        android:orderInCategory="102"
+        android:title="@string/action_delete_note"
+        android:icon="@drawable/delete"
+        app:showAsAction="ifRoom"/>
+    
     
 </menu>

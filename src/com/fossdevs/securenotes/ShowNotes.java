@@ -72,6 +72,7 @@ public class ShowNotes extends ActionBarActivity {
 			Intent intent=new Intent(getApplicationContext(),NewNote.class);
 			startActivity(intent);
 		}
+		
 		return super.onOptionsItemSelected(item);
 	}
 }

@@ -36,7 +36,7 @@ public class NewNote extends ActionBarActivity {
 				EditText title=(EditText) findViewById(R.id.noteTitle);
 				EditText body=(EditText) findViewById(R.id.noteBody);
 				String cryptedBody=crypt.encrypt(body.getText().toString(), GlobalObject.password);
-				Toast.makeText(getApplicationContext(), "crypt body!", Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), "Saved!", Toast.LENGTH_LONG).show();
 				//String cryptedTitle=crypt.encrypt(title.getText().toString(), GlobalObject.password);
 				//Insert into database.
 				DbHelper dbhelper=new DbHelper(getApplicationContext());

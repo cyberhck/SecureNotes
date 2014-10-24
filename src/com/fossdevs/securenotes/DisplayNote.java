@@ -1,6 +1,8 @@
 package com.fossdevs.securenotes;
 
 import android.support.v7.app.ActionBarActivity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -18,8 +20,13 @@ public class DisplayNote extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		return;
+	}
+	@Override
+	protected void onResume() {
 		setContentView(R.layout.activity_display_note);
 		try{
+			super.onResume();
 			Intent intent=getIntent();
 			Bundle extra=intent.getExtras();
 			String _id=extra.getString("_ID");
@@ -51,8 +58,8 @@ public class DisplayNote extends ActionBarActivity {
 		}catch(Exception e){
 			Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();			
 		}
-	}
 
+	};
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -78,6 +85,43 @@ public class DisplayNote extends ActionBarActivity {
 			Intent updateNote=new Intent(getApplicationContext(),UpdateNote.class);
 			updateNote.putExtras(bundle);
 			startActivity(updateNote);
+		}
+		if (id==R.id.deleteNote){
+			Intent mIntent=getIntent();
+			Bundle mextra=mIntent.getExtras();
+			final String m_id=mextra.getString("_ID");
+			DbHelper dbhelper=new DbHelper(getApplicationContext());
+			final SQLiteDatabase db=dbhelper.getReadableDatabase();
+			final Cursor c=db.rawQuery("SELECT * FROM notes WHERE _id="+m_id+";", null);
+			c.moveToFirst();
+			String title=c.getString(c.getColumnIndex("topic"));
+			try{
+				AlertDialog.Builder builder = new AlertDialog.Builder(DisplayNote.this)
+		        .setPositiveButton(R.string.confirmDeleteOkButton, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						db.execSQL("DELETE FROM notes WHERE _id="+m_id);
+						Toast.makeText(getApplicationContext(), "Note Deleted!", Toast.LENGTH_LONG).show();
+						finish();
+					}
+				})
+		        .setTitle(title)
+		        .setMessage(R.string.confirmDeleteNote)
+		        .setNegativeButton(R.string.confirmDeleteNoButton, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+					}
+				});
+
+		AlertDialog alert = builder.create(); // create one
+
+		alert.show();
+				
+				
+				
+				
+				
+			}catch(Exception e){
+				Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+			}
 		}
 		return super.onOptionsItemSelected(item);
 	}
