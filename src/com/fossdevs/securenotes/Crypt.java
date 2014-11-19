@@ -2,8 +2,10 @@ package com.fossdevs.securenotes;
 
 public class Crypt {
 	private String key;
+	//The key for encrypting and decrypting
 	private String text;
 	public Crypt() {
+	//empty constructor, no need of implementation
 	}
 	public String encrypt(String text,String key){
 		this.text=text;
@@ -16,6 +18,7 @@ public class Crypt {
 		for(int i=0;i<text.length();i++){
 			int sum=(int)t[i]+(int)k[i];
 			c[i]=(char)sum;
+			//add respective positioned characters and store.
 		}
 		String cip=new String(c);
 		cipher=cip;
